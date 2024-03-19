@@ -18,9 +18,6 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         if (size == 0){ // Como será el único, es primero y último
             last = nuevo;
         } else {
-            if (size == 1){ // Como habrá dos, el que había antes será el último
-                last = first;
-            }
             first.setPrevious(nuevo);
         }
         first = nuevo; // Estos pasos siempre ocurren
@@ -33,9 +30,6 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         if (size == 0){ // Como será el único, es primero y último
             first = nuevo;
         } else {
-            if (size == 1){ // Como habrá dos, el que había antes será el primero
-                first = last;
-            }
             last.setNext(nuevo);
         }
         last = nuevo; // Estos pasos siempre ocurren
