@@ -64,11 +64,13 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     @Override
     public T first() {
+        if (size == 0) throw new DoubleLinkedQueueException("Lectura en lista vacía");
         return first.getItem();
     }
 
     @Override
     public T last() {
+        if (size == 0) throw new DoubleLinkedQueueException("Lectura en lista vacía");
         return last.getItem();
     }
 
