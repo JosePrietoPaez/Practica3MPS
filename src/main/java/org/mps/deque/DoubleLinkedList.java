@@ -2,6 +2,8 @@
 
 package org.mps.deque;
 
+import java.util.Comparator;
+
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     private LinkedNode<T> first;
@@ -79,5 +81,71 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public T get(int index){
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Índice fuera de rango");
+        LinkedNode<T> actual = first;
+        for (int i = 0; i < index; i++){
+            actual = actual.getNext();
+        }
+        return actual.getItem();
+    }
+
+    @Override
+    public boolean contains(T value){
+        LinkedNode<T> actual = first;
+        while (actual != null){
+            if (actual.getItem().equals(value)){
+                return true;
+            }
+            actual = actual.getNext();
+        }
+        return false;
+    }
+
+    @Override
+    public void remove(T value){
+        LinkedNode<T> actual = first;
+        while (actual != null){
+            if (actual.getItem().equals(value)){
+                if (actual == first){
+                    deleteFirst();
+                } else if (actual == last){
+                    deleteLast();
+                } else {
+                    actual.getPrevious().setNext(actual.getNext());
+                    actual.getNext().setPrevious(actual.getPrevious());
+                    size--;
+                }
+                return;
+            }
+            actual = actual.getNext();
+        }
+    }
+
+    @Override
+    public void sort(Comparator<? super T> comparator){
+        if (size <= 1){
+            return;
+        }
+        LinkedNode<T> actual = first;
+        while (actual != null){
+            LinkedNode<T> minimo = actual;
+            LinkedNode<T> siguiente = actual.getNext();
+            while (siguiente != null){
+                if (comparator.compare(siguiente.getItem(),minimo.getItem()) < 0){
+                    minimo = siguiente;
+                }
+                siguiente = siguiente.getNext();
+            }
+            if (minimo != actual){
+                T aux = actual.getItem();
+                actual.setItem(minimo.getItem());
+                minimo.setItem(aux);
+            }
+            actual = actual.getNext();
+        }
     }
 }

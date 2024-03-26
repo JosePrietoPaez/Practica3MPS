@@ -2,6 +2,8 @@
 
 package org.mps.deque;
 
+import java.util.Comparator;
+
 /**
  * A double-ended queue or deque is a linear collection that supports element
  * insertion, retrieval and removal at both ends.
@@ -64,4 +66,38 @@ public interface DoubleLinkedQueue<T> {
     // Complex operations
     // (Estas operaciones se incluirán más adelante para ser realizadas en la segunda
     // sesión de laboratorio de esta práctica.)
+
+    /**
+     * Returns the element at the specified position in this deque.
+     *
+     * @param index the index of the element to return
+     * @return the element at the specified position in this deque
+     * @throws IndexOutOfBoundsException if the index is out of range
+     *                                   ({@code index < 0 || index >= size()})
+     */
+    T get(int index);
+
+    /**
+     * Returns true if this deque contains the specified element.
+     *
+     * @param value element whose presence in this deque is to be tested
+     */
+    boolean contains(T value);
+
+    /**
+     * Removes the first occurrence of the specified element from this deque,
+     * if it is present.
+     *
+     * @param value element to be removed from this deque, if present
+     */
+    void remove(T value);
+
+    /**
+     * Sorts this deque according to the order induced by the specified comparator.
+     *
+     * @param comparator the comparator to determine the order of this deque
+     */
+    void sort(Comparator<? super T> comparator);
+
+
 }
